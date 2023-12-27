@@ -14,11 +14,13 @@ public class StudentController {
 
     @GetMapping("/student")
     public ResponseEntity<Student> getStudent(){
-        return new ResponseEntity <>(new Student(
-                1,
-                "John",
-                "O'Donnell"
-        ),HttpStatus.OK);
+//        return new ResponseEntity <>(new Student(
+//                1,
+//                "John",
+//                "O'Donnell"
+//        ),HttpStatus.OK);
+        return ResponseEntity.ok().header("custom-header", "john")
+                .body(new Student(1, "John", "O'donn"));
 
     }
 
