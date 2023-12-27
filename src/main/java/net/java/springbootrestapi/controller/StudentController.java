@@ -2,6 +2,7 @@ package net.java.springbootrestapi.controller;
 
 import net.java.springbootrestapi.bean.Student;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,12 +13,12 @@ public class StudentController {
 
 
     @GetMapping("/student")
-    public Student getStudent(){
-        return new Student(
+    public ResponseEntity<Student> getStudent(){
+        return new ResponseEntity <>(new Student(
                 1,
                 "John",
                 "O'Donnell"
-        );
+        ),HttpStatus.OK);
 
     }
 
@@ -56,7 +57,7 @@ public class StudentController {
     }
     @DeleteMapping("students/{id}/delete")
     public String deleteStudent(@PathVariable("id") int studentId){
-        
+
         return "Student deleted";
     }
 }
