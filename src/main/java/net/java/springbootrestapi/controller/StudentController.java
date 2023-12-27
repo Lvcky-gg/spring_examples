@@ -9,22 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("students")
 public class StudentController {
 
 
-    @GetMapping("/student")
+    @GetMapping("student")
     public ResponseEntity<Student> getStudent(){
 //        return new ResponseEntity <>(new Student(
 //                1,
 //                "John",
 //                "O'Donnell"
 //        ),HttpStatus.OK);
-        return ResponseEntity.ok().header("custom-header", "john")
+        return ResponseEntity
+                .ok()
+                .header("custom-header", "john")
                 .body(new Student(1, "John", "O'donn"));
 
     }
 
-    @GetMapping("/students")
+    @GetMapping
     public List<Student> getStudents(){
         List<Student> students = new ArrayList<>();
         students.add(new Student(2, "bob", "smith"));
@@ -32,17 +35,17 @@ public class StudentController {
 
         return students;
     }
-    @GetMapping("/students/{id}")
+    @GetMapping("/{id}")
     public Student studentPathVariable(@PathVariable("id") int id){
         return new Student(id, "J", "O");
     }
 
-    @GetMapping("students/query")
+    @GetMapping("/query")
     public Student studentRequestVariable(@RequestParam int id){
         return new Student(id, "J", "O");
     }
 
-    @PostMapping("students/create")
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student){
         System.out.println(student.getId());
@@ -51,13 +54,13 @@ public class StudentController {
     }
 
 
-    @PutMapping("students/{id}/update")
+    @PutMapping("/{id}/update")
     public Student updateStudent(@RequestBody Student student,@PathVariable("id") int id){
         System.out.println(student.getFirstName());
         System.out.println(student.getLastName());
         return student;
     }
-    @DeleteMapping("students/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public String deleteStudent(@PathVariable("id") int studentId){
 
         return "Student deleted";
